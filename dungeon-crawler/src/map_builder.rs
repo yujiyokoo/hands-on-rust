@@ -1,4 +1,5 @@
 use crate::prelude::*;
+
 const NUM_ROOMS: usize = 20;
 
 pub struct MapBuilder {
