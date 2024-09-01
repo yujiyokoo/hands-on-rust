@@ -7,7 +7,10 @@ pub struct Render {
 }
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct Player {}
+pub struct Player;
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct Enemy {}
+pub struct Enemy;
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct MovingRandomly;

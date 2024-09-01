@@ -2,7 +2,7 @@ use crate::prelude::*;
 
 pub fn spawn_player(ecs: &mut World, pos: Point) {
     ecs.push((
-        Player {},
+        Player,
         pos,
         Render {
             colour: ColorPair::new(WHITE, BLACK),
@@ -13,7 +13,7 @@ pub fn spawn_player(ecs: &mut World, pos: Point) {
 
 pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Point) {
     ecs.push((
-        Enemy {},
+        Enemy,
         pos,
         Render {
             colour: ColorPair::new(WHITE, BLACK),
@@ -24,5 +24,6 @@ pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Poin
                 _ => to_cp437('g'),
             },
         },
+        MovingRandomly,
     ));
 }
