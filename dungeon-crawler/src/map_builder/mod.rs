@@ -1,11 +1,13 @@
 use crate::prelude::*;
 
 mod automata;
+mod drunkard;
 mod empty;
 mod rooms;
-// use empty::EmptyArchitect;
 use automata::CellularAutomataArchitect;
-// use rooms::RoomsArchitect;
+use drunkard::DrunkardsWalkArchitect;
+use empty::EmptyArchitect;
+use rooms::RoomsArchitect;
 
 const NUM_ROOMS: usize = 20;
 
@@ -85,8 +87,13 @@ impl MapBuilder {
     }
 
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        let mut architect = CellularAutomataArchitect {};
-        architect.new(rng)
+        let mut architect: Box<dyn MapArchitect> = match rng.range(0, 3) {
+            0 => Box::new(DrunkardsWalkArchitect {}),
+            1 => Box::new(RoomsArchitect {}),
+            _ => Box::new(CellularAutomataArchitect {}),
+        };
+        let mb = architect.new(rng);
+        mb
     }
 
     fn find_most_distant(&self) -> Point {
