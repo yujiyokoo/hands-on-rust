@@ -28,14 +28,7 @@ pub fn map_render(
                 };
 
                 let glyph = theme.tile_to_render(map.tiles[idx]);
-                match map.tiles[idx] {
-                    TileType::Floor => {
-                        draw_batch.set(pt - offset, ColorPair::new(tint, BLACK), glyph);
-                    }
-                    TileType::Wall => {
-                        draw_batch.set(pt - offset, ColorPair::new(tint, BLACK), glyph);
-                    }
-                }
+                draw_batch.set(pt - offset, ColorPair::new(tint, BLACK), glyph);
             }
         }
     }
