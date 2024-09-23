@@ -59,20 +59,6 @@ pub fn player_input(
             VirtualKeyCode::Key9 => use_item(8, ecs, commands),
             _ => Point::new(0, 0),
         };
-        let mut did_something = false;
-
-        let mut players = <(Entity, &Point)>::query().filter(component::<Player>());
-        players.iter(ecs).for_each(|(entity, pos)| {
-            let destination = *pos + delta;
-            commands.push((
-                (),
-                WantsToMove {
-                    entity: *entity,
-                    destination,
-                },
-            ));
-            *turn_state = TurnState::PlayerTurn;
-        });
 
         let (player_entity, destination) = players
             .iter(ecs)
@@ -86,7 +72,6 @@ pub fn player_input(
                 .filter(|(_, pos)| **pos == destination)
                 .for_each(|(entity, _)| {
                     hit_something = true;
-                    did_something = true;
                     commands.push((
                         (),
                         WantsToAttack {
@@ -97,7 +82,6 @@ pub fn player_input(
                 });
 
             if !hit_something {
-                did_something = true;
                 commands.push((
                     (),
                     WantsToMove {
