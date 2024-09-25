@@ -45,12 +45,7 @@ pub fn combat(ecs: &mut SubWorld, commands: &mut CommandBuffer) {
             .get_component_mut::<Health>()
         {
             health.current -= final_damage;
-            println!(
-                "final damage: {final_damage}, remaining health: {:?}",
-                health.current
-            );
             if health.current < 1 && !is_player {
-                println!("removing victim");
                 commands.remove(*victim);
             }
         }
